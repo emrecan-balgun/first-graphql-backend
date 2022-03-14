@@ -5,7 +5,21 @@ const author = {
     id: "1",
     name: "Albert",
     surname: "Camus",
-    age: "41"
+    age: "41",
+    books: [
+        {
+        id: "1",
+        title: "The Stranger",
+        score: "9",
+        isPublished: false
+    },
+    {
+        id: "2",
+        title: "The Mother",
+        score: "7",
+        isPublished: true
+    },
+]
 }
 
 const book = {
@@ -22,12 +36,13 @@ const typeDefs = gql`
         name: String!
         surname: String
         age: Int
+        books: [Book!] # if the book exists it cannot be null
     }
 
     type Book {
         id: ID!
         title: String!
-        author: Author!
+        author: Author
         score: Float
         isPublished: Boolean
     }
