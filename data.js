@@ -16,8 +16,17 @@ const authors = [{
         score: "7",
         isPublished: true
     },
+    ]
+    },
+
+    {
+        id: "2",
+        name: "Robert",
+        surname: "Cervantes",
+        age: "33",
+        books: []
+    }
 ]
-}]
 
 const books = [
     {

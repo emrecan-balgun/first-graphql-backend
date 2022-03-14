@@ -22,8 +22,11 @@ const typeDefs = gql`
 
     type Query {
         books: [Book!] # an array can be empty, but the object inside cannot be null
-        book(id: ID): Book!
+        book(id: ID!): Book!
+
+
         authors: [Author!]
+        author(id: ID!): Author!
     }
 `;
 
@@ -35,7 +38,13 @@ const resolvers = {
 
             return data;
         },
-        authors: () => authors
+
+        authors: () => authors,
+        author: (parent, args) => {
+            const data = authors.find(author => author.id === args.id);
+
+            return data;
+        }
     }
 };
 
