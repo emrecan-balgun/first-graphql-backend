@@ -1,34 +1,7 @@
 const { ApolloServer, gql } = require('apollo-server');
 const { ApolloServerPluginLandingPageGraphQLPlayground } = require('apollo-server-core');
 
-const author = {
-    id: "1",
-    name: "Albert",
-    surname: "Camus",
-    age: "41",
-    books: [
-        {
-        id: "1",
-        title: "The Stranger",
-        score: "9",
-        isPublished: false
-    },
-    {
-        id: "2",
-        title: "The Mother",
-        score: "7",
-        isPublished: true
-    },
-]
-}
-
-const book = {
-        id: "qwe123",
-        title: "Yabancı",
-        author, // author: author
-        score: 3.4,
-        isPublished: true,
-}
+const { books, authors } = require('./data');
 
 const typeDefs = gql`
     type Author {
@@ -48,15 +21,21 @@ const typeDefs = gql`
     }
 
     type Query {
-        book: Book
-        author: Author
+        books: [Book!] # an array can be empty, but the object inside cannot be null
+        book(id: ID): Book!
+        authors: [Author!]
     }
 `;
 
 const resolvers = {
     Query: {
-        book: () => book,
-        author: () => author
+        books: () => books,
+        book: (parent, args) => {
+            const data = books.find(book => book.id === args.id);
+
+            return data;
+        },
+        authors: () => authors
     }
 };
 
