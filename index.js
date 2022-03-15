@@ -16,6 +16,7 @@ const typeDefs = gql`
         id: ID!
         title: String!
         author: Author
+        author_id: ID!
         score: Float
         isPublished: Boolean
     }
@@ -44,6 +45,12 @@ const resolvers = {
             const data = authors.find(author => author.id === args.id);
 
             return data;
+        }
+    },
+
+    Book: {
+        author: (parent, args) => {
+            return authors.find((author) => author.id ===  parent.author_id)
         }
     }
 };
