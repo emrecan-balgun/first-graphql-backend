@@ -28,6 +28,13 @@ const books = [
         score: 7.1,
         isPublished: false,
     },
+    {
+        id: "3",
+        title: "Düzenbaz",
+        author_id: "1",
+        score: 8.4,
+        isPublished: true,
+    },
 ]
 
 module.exports = {

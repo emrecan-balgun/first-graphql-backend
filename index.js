@@ -49,8 +49,14 @@ const resolvers = {
     },
 
     Book: {
-        author: (parent, args) => {
+        author: (parent) => {
             return authors.find((author) => author.id ===  parent.author_id)
+        }
+    },
+
+    Author: {
+        books: (parent) => {
+            return books.filter((book) => book.author_id === parent.id)
         }
     }
 };
