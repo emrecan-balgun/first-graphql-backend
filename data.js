@@ -35,6 +35,13 @@ const books = [
         score: 8.4,
         isPublished: true,
     },
+    {
+        id: "4",
+        title: "Denemeler",
+        author_id: "2",
+        score: 5.9,
+        isPublished: false,
+    },
 ]
 
 module.exports = {
