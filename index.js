@@ -9,7 +9,7 @@ const typeDefs = gql`
         name: String!
         surname: String
         age: Int
-        books: [Book!] # if the book exists it cannot be null
+        books(filter: String): [Book!] # if the book exists it cannot be null
     }
 
     type Book {
@@ -47,7 +47,15 @@ const resolvers = {
     },
 
     Author: {
-        books: (parent) => books.filter((book) => book.author_id === parent.id),
+        books: (parent, args) => {
+        let filtered = books.filter((book) => book.author_id === parent.id)
+
+        if(args.filter) {
+            filtered = filtered.filter((book) => book.title.toLowerCase().startsWith(args.filter))
+        }
+        
+        return filtered
+    }
     }
 };
 
